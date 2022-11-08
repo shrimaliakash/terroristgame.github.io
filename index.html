@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Terrorist Game</title>
+        <link rel="stylesheet" href="./index.css" />
+    </head>
+    <body>
+        <div class="container">
+            <button type="button" class="startBtn">START GAME</button>
+
+            <audio id="sound1" src="./kill.mp3" preload="auto"></audio>
+            <img src="./images/crosshair.jpg" alt="Crosshair" class="cursor" />
+            <img src="./images/blood_spot.jpg" alt="Blood Spot" class="bloodSpot" />
+        </div>
+
+        <script>
+            const container = document.querySelector(".container");
+            const bloodSpot = document.querySelector(".bloodSpot");
+            const terrorist = document.createElement("img");
+            const startBtn = document.querySelector('.startBtn');
+
+            terrorist.setAttribute("class", "terrorist");
+            terrorist.setAttribute("src", "./images/terrorist.jpg");
+
+            const contHeight = container.offsetHeight;
+            const contWidth = container.offsetWidth;
+
+            setInterval(() => {
+                const randTop = Math.random() * (contHeight - 100);
+                const randLeft = Math.random() * (contWidth - 100);
+
+                terrorist.style.position = "absolute";
+                terrorist.style.top = randTop + "px";
+                terrorist.style.left = randLeft + "px";
+            }, 1000);
+
+            let score = 0;
+
+            startBtn.addEventListener("click", () => {
+                container.appendChild(terrorist);
+
+                startBtn.innerText = "Score: " + score;
+            });
+
+            window.addEventListener("click", (e) => {
+                bloodSpot.style.top = e.pageY + "px";
+                bloodSpot.style.left = e.pageX + "px";
+
+                if(e.target === terrorist) {
+                    score++;
+                    document.getElementById('sound1').play();
+                    startBtn.innerText = "Score: " + score;
+                }
+            });
+
+            const cursor = document.querySelector(".cursor");
+            window.addEventListener("mousemove", (e) => {
+                cursor.style.top = e.pageY + "px";
+                cursor.style.left = e.pageX + "px";
+            });
+        </script>
+    </body>
+</html>
