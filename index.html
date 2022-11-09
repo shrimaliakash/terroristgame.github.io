@@ -43,9 +43,7 @@
                 container.appendChild(terrorist);
 
                 startBtn.innerText = "Score: " + score;
-            });
-
-            window.addEventListener("click", (e) => {
+                window.addEventListener("click", (e) => {
                 bloodSpot.style.top = e.pageY + "px";
                 bloodSpot.style.left = e.pageX + "px";
 
@@ -55,6 +53,9 @@
                     startBtn.innerText = "Score: " + score;
                 }
             });
+            });
+
+            
 
             const cursor = document.querySelector(".cursor");
             window.addEventListener("mousemove", (e) => {
